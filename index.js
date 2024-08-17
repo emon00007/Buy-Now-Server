@@ -51,16 +51,16 @@ async function run() {
                     $lte: maximum
                 };
             }
-
-            let sort = { createdAt: -1 };
+// sortValue hight lowest , oldest current 
+            let sort = {listing_date: -1 };
             if (sortValue === 'Low to High') {
-                sort = { price: 1 };
+                sort = { price_range: 1 };
             } else if (sortValue === 'High to Low') {
-                sort = { price: -1 };
+                sort = { price_range: -1 };
             } else if (sortValue === 'Newest first') {
-                sort = { createdAt: -1 };
+                sort = {listing_date: -1 };
             }else if (sortValue==='Oldest first'){
-                sort ={ createdAt: 1 };
+                sort ={listing_date: 1 };
             }
 
             const skip = (page - 1) * limit;
