@@ -35,7 +35,6 @@ async function run() {
             const minimum =req.query.minimum ||''
             const maximum = req.query.maximum ||''
             const limit = 10;
-console.log(page);
             const query = {};
             if (search) {
                 query.product_name = { $regex: search, $options: "i" };
