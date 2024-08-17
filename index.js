@@ -25,16 +25,17 @@ async function run() {
         const productCollection = client.db('BuyNow').collection('productCollection');
 
 
-
+        // get api 
         app.get('/product', async (req, res) => {
             const search = req.query.search || '';
             const brand = req.query.brand || '';
             const category = req.query.category || '';
             const page = parseInt(req.query.page, 10) || 1;
             const sortValue = req.query.sort || 'Newest first';
-            const minimum =req.query.minimum ||''
-            const maximum = req.query.maximum ||''
+            const minimum = req.query.minimum || ''
+            const maximum = req.query.maximum || ''
             const limit = 10;
+            // query for fiending data  use search brand and category
             const query = {};
             if (search) {
                 query.product_name = { $regex: search, $options: "i" };
@@ -51,16 +52,16 @@ async function run() {
                     $lte: maximum
                 };
             }
-// sortValue hight lowest , oldest current 
-            let sort = {listing_date: -1 };
+            // sortValue hight lowest , oldest current 
+            let sort = { listing_date: -1 };
             if (sortValue === 'Low to High') {
                 sort = { price_range: 1 };
             } else if (sortValue === 'High to Low') {
                 sort = { price_range: -1 };
             } else if (sortValue === 'Newest first') {
-                sort = {listing_date: -1 };
-            }else if (sortValue==='Oldest first'){
-                sort ={listing_date: 1 };
+                sort = { listing_date: -1 };
+            } else if (sortValue === 'Oldest first') {
+                sort = { listing_date: 1 };
             }
 
             const skip = (page - 1) * limit;
