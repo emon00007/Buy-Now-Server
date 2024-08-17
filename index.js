@@ -5,7 +5,7 @@ require('dotenv').config();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors())
 app.use(express.json());
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
     try {
-        await client.connect();
+        // await client.connect();
         const productCollection = client.db('BuyNow').collection('productCollection');
 
 
@@ -53,11 +53,11 @@ async function run() {
                 };
             }
             // sortValue hight lowest , oldest current 
-            let sort = { listing_date: -1 };
+            // let sort = { listing_date: -1 };
             if (sortValue === 'Low to High') {
                 sort = { price_range: 1 };
             } else if (sortValue === 'High to Low') {
-                sort = { price_range: -1 };
+                sort = {price_range: -1 };
             } else if (sortValue === 'Newest first') {
                 sort = { listing_date: -1 };
             } else if (sortValue === 'Oldest first') {
@@ -83,8 +83,8 @@ async function run() {
             }
         });
 
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        // await client.db("admin").command({ ping: 1 });
+        // console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
         // Ensures that the client will close when you finish/error
         // await client.close();
